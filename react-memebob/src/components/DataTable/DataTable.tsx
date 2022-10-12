@@ -14,7 +14,7 @@ import FishDead from '../../assets/images/memes/fish-dead-to-me.jpg';
 const columns: GridColDef[] = [
     {field: 'id', headerName: 'ID', width: 90, hide: true },
     {field: 'image_source', headerName: 'Image Source', flex: 1, renderCell: (params) =>{
-        let imageUrlBase = '../../assets/images/memes/';
+        let imageUrlBase = 'memes/';
         let image = params.row.image_source;
         let imageUrl = imageUrlBase + image;
         return(
@@ -53,6 +53,13 @@ export const DataTable = () => {
         setTimeout( () => {window.location.reload(); }, 1000);
     }
 
+    const loopThrough = () => {
+        for (var image of memeData) {
+            let result = image;
+        }
+    }
+
+    console.log(loopThrough);
 
   return (
     <div style={{ height: 400, width: '100%'}}>
@@ -66,8 +73,7 @@ export const DataTable = () => {
         <Button onClick={handleOpen}>Update</Button>
         <Button variant="contained" color="secondary" onClick={deleteData}>Delete</Button>
 
-        <img src="../../assets/images/memes/fish-dead-to-me.jpg"></img>
-        <img src={FishDead}></img>
+        {/* <img src="memes/fish-dead-to-me.jpg"></img> */}
 
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id='form-dialog-title'>Update Meme {selectionModel}</DialogTitle>
