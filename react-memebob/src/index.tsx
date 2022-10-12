@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { FirebaseAppProvider, AuthCheck } from 'reactfire';
-import { Home, SignIn, MemeGenerator, Logout } from './components';
+import { Home, SignIn, MemeGenerator, Logout} from './components';
 import './assets/css/style.css';
 import { firebaseConfig } from './firebaseConfig';
 import 'firebase/auth';
 import { store } from './redux/store';
+
+import ImageCreator from './components/ImageCreator/ImageCreator';
 
 let myTitle = 'Memebob Generatorpants';
 
@@ -32,6 +34,10 @@ ReactDOM.render(
 
         <Route path="/meme-generator">
           <MemeGenerator />
+        </Route>
+
+        <Route path='/image-creator'>
+          <ImageCreator />
         </Route>
 
       </Switch>
