@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataGrid, GridColDef } from '@material-ui/data-grid';
 import { useGetData } from '../../custom-hooks';
 import { server_calls } from '../../api';
@@ -9,7 +9,6 @@ import { Button, Dialog,
     DialogTitle
 } from '@material-ui/core';
 import { MemeForm } from '../MemeForm';
-import FishDead from '../../assets/images/memes/fish-dead-to-me.jpg';
 
 const columns: GridColDef[] = [
     {field: 'id', headerName: 'ID', width: 90, hide: true },
@@ -31,6 +30,7 @@ interface gridData {
         id?: string;
     }
 }
+
 
 export const DataTable = () => {
 
@@ -54,26 +54,35 @@ export const DataTable = () => {
     }
 
     const loopThrough = () => {
-        for (var image of memeData) {
-            let result = image;
-        }
-    }
+        let result = "";
 
-    console.log(loopThrough);
+        for (var image of memeData) {
+            let urlBase = 'memes/';
+            let url = urlBase + image.image_source;
+            console.log(urlBase + image.image_source);
+            result += `<img src=${url} />`;
+        }
+
+        return result;
+    }
 
   return (
     <div style={{ height: 400, width: '100%'}}>
         <h2>My Memes</h2>
 
-        <DataGrid rows={memeData} columns={ columns } pageSize={ 5 } checkboxSelection={true}
-        onSelectionModelChange={ (item) => {
-            setSelectionModel(item)
-        }} />
-
         <Button onClick={handleOpen}>Update</Button>
         <Button variant="contained" color="secondary" onClick={deleteData}>Delete</Button>
 
-        {/* <img src="memes/fish-dead-to-me.jpg"></img> */}
+        <div>
+        {
+            memeData.map((image, index) => {
+                let urlBase = 'memes/';
+                let url = urlBase + image.image_source;
+
+                return <img src={url}/>;
+            })
+        }
+        </div>
 
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id='form-dialog-title'>Update Meme {selectionModel}</DialogTitle>

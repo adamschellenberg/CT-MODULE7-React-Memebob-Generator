@@ -256,8 +256,9 @@ export const MemeGenerator = withRouter((props:MemeGeneratorProps) => {
           </List>
         </MUIDrawer>
         <main className={`${clsx(classes.content, {[classes.contentShift]: open,})} ${classes.leftMargin}`}>
-                <div className={classes.drawerHeader} />
-                    <DataTable />
+          <div className={classes.drawerHeader} />
+
+            <DataTable />
         </main>
     </div>
     </div>
