@@ -9,6 +9,8 @@ import { Button, Dialog,
     DialogTitle
 } from '@material-ui/core';
 import { MemeForm } from '../MemeForm';
+import { makeStyles } from '@material-ui/core';
+
 
 const columns: GridColDef[] = [
     {field: 'id', headerName: 'ID', width: 90, hide: true },
@@ -31,8 +33,27 @@ interface gridData {
     }
 }
 
+const useStyles = makeStyles({
+    memeContainer: {
+        width: '80%',
+    },
+    meme: {
+        width: '50%',
+    },
+    img: {
+        width: '100%',
+    },
+    memeText: {
+        color: 'white',
+        textTransform: 'uppercase',
+        align: 'center',
+    }
+})
+
 
 export const DataTable = () => {
+
+    const classes = useStyles();
 
     let { memeData, getData } = useGetData();
     let [ open, setOpen ] = useState(false);
@@ -73,13 +94,19 @@ export const DataTable = () => {
         <Button onClick={handleOpen}>Update</Button>
         <Button variant="contained" color="secondary" onClick={deleteData}>Delete</Button>
 
-        <div>
+        <div className={classes.memeContainer}>
         {
             memeData.map((image, index) => {
                 let urlBase = 'memes/';
                 let url = urlBase + image.image_source;
+                let text = image.meme_text;
 
-                return <img src={url}/>;
+                return (
+                    <div className={classes.meme}>
+                        <img src={url} className={classes.img}/>
+                        <span className={classes.memeText}>{text}</span>
+                    </div>
+                );
             })
         }
         </div>
