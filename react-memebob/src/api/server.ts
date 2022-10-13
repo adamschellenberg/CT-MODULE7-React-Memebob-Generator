@@ -34,6 +34,7 @@ export const server_calls = {
     },
 
     update: async (id:string, data:any = {}) => {
+        console.log(`update call data: ${JSON.stringify(data)}`);
         const response = await fetch(`https://meme-generator-adam.herokuapp.com/api/memes/${id}`, {
             method: 'POST',
             headers: {

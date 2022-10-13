@@ -168,8 +168,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       marginLeft: '240px',
   },
   background: {
-    backgroundColor: '#FFF280',
-    height: '100vh'
+    // backgroundColor: '#FFF280',
+    height: '100%'
   }
 }))
 

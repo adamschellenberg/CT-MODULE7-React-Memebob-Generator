@@ -12,20 +12,20 @@ import { MemeForm } from '../MemeForm';
 import { makeStyles } from '@material-ui/core';
 
 
-const columns: GridColDef[] = [
-    {field: 'id', headerName: 'ID', width: 90, hide: true },
-    {field: 'image_source', headerName: 'Image Source', flex: 1, renderCell: (params) =>{
-        let imageUrlBase = 'memes/';
-        let image = params.row.image_source;
-        let imageUrl = imageUrlBase + image;
-        return(
-            <div>
-                <img src={imageUrl} alt='Testing' height="200px" width="200px"/>
-            </div>
-        )
-    } },
-    {field: 'meme_text', headerName: 'Meme Text', flex: 1, hide: true},
-];
+// const columns: GridColDef[] = [
+//     {field: 'id', headerName: 'ID', width: 90, hide: true },
+//     {field: 'image_source', headerName: 'Image Source', flex: 1, renderCell: (params) =>{
+//         let imageUrlBase = 'memes/';
+//         let image = params.row.image_source;
+//         let imageUrl = imageUrlBase + image;
+//         return(
+//             <div>
+//                 <img src={imageUrl} alt='Testing' height="200px" width="200px"/>
+//             </div>
+//         )
+//     } },
+//     {field: 'meme_text', headerName: 'Meme Text', flex: 1, hide: true},
+// ];
 
 interface gridData {
     data: {
@@ -36,17 +36,31 @@ interface gridData {
 const useStyles = makeStyles({
     memeContainer: {
         width: '80%',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     meme: {
-        width: '50%',
+        width: 'fit-content',
+        height: 'fit-content',
+        position: 'relative',
+        textAlign: 'center',
+        color: 'white'
     },
     img: {
-        width: '100%',
+        width: '300px',
+        height: 'auto'
     },
     memeText: {
-        color: 'white',
+        position: 'absolute',
+        width: '80%',
         textTransform: 'uppercase',
-        align: 'center',
+        textShadow: '1px 1px black',
+        fontFamily: 'Impact, fantasy',
+        letterSpacing: '2px',
+        textAlign: 'center',
+        bottom: '5px',
+        left: '25px',
+        // textJustify: 'inter-word',
     }
 })
 
@@ -80,11 +94,16 @@ export const DataTable = () => {
         for (var image of memeData) {
             let urlBase = 'memes/';
             let url = urlBase + image.image_source;
-            console.log(urlBase + image.image_source);
+            // console.log(urlBase + image.image_source);
             result += `<img src=${url} />`;
         }
 
         return result;
+    }
+
+    const updateSelectionModel = (id:any) => {
+        console.log(`selection id: ${id}`)
+        setSelectionModel(id);
     }
 
   return (
@@ -100,11 +119,13 @@ export const DataTable = () => {
                 let urlBase = 'memes/';
                 let url = urlBase + image.image_source;
                 let text = image.meme_text;
+                let id = image.id;
 
                 return (
                     <div className={classes.meme}>
                         <img src={url} className={classes.img}/>
-                        <span className={classes.memeText}>{text}</span>
+                        <h2 className={classes.memeText}>{text}</h2>
+                        <input type="radio" id={id}  value={id} name="meme" onChange={() => updateSelectionModel(id)}/>
                     </div>
                 );
             })

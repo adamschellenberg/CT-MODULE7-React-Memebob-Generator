@@ -12,7 +12,7 @@ export const useGetData = () => {
 
     async function handleDataFetch(){
         const result = await server_calls.get();
-        console.log(result);
+        // console.log(result);
         setData(result)
     }
 
