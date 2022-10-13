@@ -44,14 +44,14 @@ export const MemeForm = (props:MemeFormProps) => {
             console.log(`image source: ${data.image_source}`);
             console.log(`meme text: ${data.meme_text}`);
             console.log(`id: ${props.id}`);
-            setTimeout( () => {window.location.reload()}, 10000);
+            setTimeout( () => {window.location.reload()}, 1000);
             event.target.reset();
         } else {
             dispatch(chooseImage(data.image_source));
             console.log(data.image_source)
             dispatch(chooseText(data.meme_text));
             server_calls.create(store.getState());
-            setTimeout( () => {window.location.reload()}, 10000);
+            setTimeout( () => {window.location.reload()}, 1000);
         }
     }
 
